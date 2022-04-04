@@ -1,0 +1,124 @@
+{% extends "template2.html" %}
+
+{% block title %} Pridat inzerat|Lezeckybazar.cz {% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+
+<div class="container" >
+    <div class="row">
+  
+      <div class="col">
+        <a href="/pridat-inzerat">
+        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" style="margin-bottom: 20px;" fill="#D16014" class="bi bi-arrow-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg>
+        </a>
+       
+
+        <h4>Popiš svůj inzerát a máme hotovo</h4>
+  
+        <div class="progress">
+          <div class="progress-bar" role="progressbar"  style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> 100%</div>
+        </div>
+        
+  
+  
+  
+      </div>
+      
+    
+    
+    
+    
+    </div>
+  
+  </div>
+
+
+
+<div class="container" >
+
+  <div class="row" style="padding-left: 10vw; padding-top: 5vh; padding-right: 10vw; padding-bottom: 10vh;">
+    <div class="col_form">
+    <h5>Inzerát:</h5>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="exampleInputEmail1" class="form-label">Zvolte kategorii</label>
+        <select class="form-select" required name="category" aria-label=".form-select-lg example" style="margin-bottom: 1vh;">
+            <option value="Lezecky">Lezečky</option>
+            <option value="Obleceni">Oblečení</option>
+            <option value="Treninkove pomucky">Treninkové pomůcky</option>
+            <option value="Cajky">Cajky</option>
+            <option value="Maglajz">Maglajz</option>
+            <option value="Sedaky">Sedáky</option>
+          </select>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Název inzerátu</label>
+          <input type="text" name="post_name" required class="form-control" id="exampleInputEmail1" placeholder="La sportiva solution vel. 43 - zanovni" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Popis</label>
+            <textarea class="form-control" required name="description" id="exampleFormControlTextarea1" rows="5"></textarea>
+          </div>
+        <div class="mb-3" style="padding-bottom: 1vh;">
+            <label for="formFile" class="form-label">Fotka</label>
+            <input class="form-control" autocomplete="off" name="image" type="file" id="formFile">
+        </div>
+        <label for="formFile" class="form-label">Cena</label>
+        <div class="input-group mb-3" style="padding-right: 30vw;" >
+          
+          <input type="text" name= "price" required class="form-control"  aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <span class="input-group-text" id="basic-addon2">,- Kč</span>
+        </div>
+        <label for="exampleInputEmail1" class="form-label">Zvolte nejbližší město</label>
+        <select class="form-select" required name="location"  aria-label=".form-select-lg example" style="margin-bottom: 1vh;">
+            <option value="Brno">Brno</option>
+            <option value="Praha">Praha</option>
+            <option value="Ostrava">Ostrava</option>
+            <option value="Plzeň">Plzeň</option>
+            <option value="Olomouc">Olomouc</option>
+            <option value="Zlin">Zlín</option>
+            <option value="Ceske budejovice">České Budějovice</option>
+            <option value="Usti nad labem">Ústí nad Labem</option>
+            <option value="Liberec">Liberec</option>
+            <option value="Hradec kralove">Hradec Králové</option>
+        
+        
+
+          </select>
+        <h5>Osobní údaje:</h5>
+        <div class="mb-3" style="margin-right: 25vw;">
+            <label for="exampleInputEmail1" class="form-label">Jméno</label>
+            <input type="text" class="form-control" required name="person_name" id="exampleInputEmail1"  aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3" style="margin-right: 25vw;">
+            <label for="exampleInputEmail1" class="form-label">Kontakt </label>
+            <input type="text" class="form-control" required name="contact" id="exampleInputEmail1"  aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3" style="margin-right: 25vw;">
+            <label for="exampleInputEmail1" class="form-label">Heslo</label>
+            <input type="text" class="form-control" required name="password" id="exampleInputEmail1"  aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">Je potřeba ke smazání inzerátu - uschovat!</div>
+            </div>
+          
+        <div class="mb-3 form-check">
+          <input type="checkbox" required class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Souhlasím s obchodními podmínkami a se zpracovaním osobních udajů.</label>
+        </div>
+        
+        <button type="submit" class="btn_form"> <svg xmlns="http://www.w3.org/2000/svg" style="margin-right: 10px;" width="25" height="25" fill="currentColor" class="bi bi-send-plus-fill" viewBox="0 0 16 16">
+          <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+          <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5Z"/>
+        </svg>Zveřejnit inzerát</button>
+      
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}

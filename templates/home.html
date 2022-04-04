@@ -1,0 +1,63 @@
+{% extends "template2.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+<div class="container px-4 py-5" >
+  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class="col">
+      <div class="col_category text-white" >
+      <div class="feature-icon">
+        <img style="width: 80px;" src="/static/svg/rock.svg"></img>
+      </div>
+      <h2>Sportovní lezení a bouldering</h2>
+      <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+      <div class="d-grid gap-2">
+        <a class="btn btn-primary" href="/lezeni/vse/1" role="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+          </svg>
+          Zobrazit inzeráty</a>
+      </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="col_category text-white" >
+      <div class="feature-icon">
+        <img style="width: 80px;" src="/static/svg/mountains.svg"></img>
+      </div>
+      <h2>Vysokohorské <br> sporty</h2>
+      <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+          </svg>
+          Zobrazit inzeráty</button>
+      </div>
+      </div>
+    </div>
+    
+    
+    <div class="col">
+      <div class="col_category text-white" >
+      <div class="feature-icon">
+        <img style="width: 80px;" src="/static/svg/ice-climbing.svg"></img>
+      </div>
+      <h2>Drytooling a <br> ledolezení</h2>
+      <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+          </svg>
+          Zobrazit inzeráty</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

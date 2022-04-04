@@ -1,0 +1,138 @@
+.col_category{
+
+    background-color: #315C7C;
+    padding-top: 80px; 
+    padding-bottom: 80px; 
+    text-align: center; 
+    padding-left: 15px; 
+    padding-right: 15px
+
+}
+
+.btn{
+
+    border-radius: 15px;
+    background-color: #D16014;
+    border-color: #315C7C;
+    font-size: 16px;
+   
+}
+
+.btn:hover{
+
+    border-radius: 15px;
+    background-color: #a1511b;
+    border-color: #315C7C;
+   
+}
+
+.choose_sport {
+
+    background-color: #315C7C;
+    height: 500px;
+    align-items: center;
+    justify-content: center;
+
+
+
+}
+
+.feature-icon {
+
+    background-color: #D16014;
+    width: fit-content; 
+    padding: 20px; 
+    border-radius: 15px; 
+    margin: auto; 
+    margin-bottom: 20px;
+
+}
+
+.d-grid {
+
+    margin-right: 50px; 
+    margin-left: 50px; 
+    margin-top: 50px;
+
+}
+
+.progress {
+    height: 25px;
+    border-radius: 15px;
+}
+
+.progress-bar{
+
+    background-color: #D16014;
+    font-size: 13px;
+    border-radius: 15px;
+}
+
+h4{
+
+    color: #315C7C;
+    font-size: 35px;
+    padding-bottom: 30px;
+}
+
+
+.col_choose{
+
+    background-color: #315C7C;
+    padding-top: 50px; 
+    padding-bottom: 50px; 
+    text-align: center; 
+    padding-left: 15px; 
+    padding-right: 15px
+
+}
+
+.col_form{
+
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+
+}
+
+.btn_form{
+
+    border-radius: 15px;
+    background-color: #D16014;
+    border-color: #ffffff;
+    color: #ffffff;
+    height: 45px;
+    font-size: 17px;
+    width: 100%;
+    
+   
+}
+
+.btn_form:hover{
+
+    border-radius: 15px;
+    background-color: #a1511b;
+    border-color: #ffffff;
+    color: #ffffff;
+    
+    height: 45px;
+    font-size: 17px;
+    width: 100%;
+   
+}
+
+h5{
+
+    color: #315C7C;
+    font-size: 25px;
+    padding-bottom: 5px;
+    padding-top: 20px;
+}
+
+.offcanvas {
+
+    background-color: blanchedalmond; 
+    margin-right: 100px;
+}
