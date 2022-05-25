@@ -23,9 +23,9 @@ How to run:
 2. enter this to your terminal and confirm: FLASK_APP=bazar.py flask run
 3. terminal will show you local host adress and you are able to run APP in your browser
 
+<img width="1440" alt="Snímek obrazovky 2022-05-25 v 10 35 36" src="https://user-images.githubusercontent.com/99679386/170231266-16b2af55-ad43-46c6-bada-39e98a7f505a.png">
+<img width="1440" alt="Snímek obrazovky 2022-05-25 v 10 35 27" src="https://user-images.githubusercontent.com/99679386/170231275-f613bf8c-c3ba-43ef-8da4-028753f4dcc1.png">
 <img width="1440" alt="Snímek obrazovky 2022-05-25 v 10 35 50" src="https://user-images.githubusercontent.com/99679386/170231255-23a3926f-4711-4088-a306-107d9b4b3bbf.png">
 <img width="1440" alt="Snímek obrazovky 2022-05-25 v 10 35 54" src="https://user-images.githubusercontent.com/99679386/170231261-2e7d6c9b-178b-4aa5-8d77-736d873802b1.png">
 <img width="1440" alt="Snímek obrazovky 2022-05-25 v 10 35 58" src="https://user-images.githubusercontent.com/99679386/170231262-936180e1-84ba-4001-ab13-13e547fde2c5.png">
 <img width="1440" alt="Snímek obrazovky 2022-05-25 v 10 35 42" src="https://user-images.githubusercontent.com/99679386/170231265-a393b344-2680-49b9-9b96-f969de4f6e0f.png">
-<img width="1440" alt="Snímek obrazovky 2022-05-25 v 10 35 36" src="https://user-images.githubusercontent.com/99679386/170231266-16b2af55-ad43-46c6-bada-39e98a7f505a.png">
-<img width="1440" alt="Snímek obrazovky 2022-05-25 v 10 35 27" src="https://user-images.githubusercontent.com/99679386/170231275-f613bf8c-c3ba-43ef-8da4-028753f4dcc1.png">
