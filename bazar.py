@@ -1,11 +1,9 @@
-
-from crypt import methods
-import imghdr
-from pydoc import render_doc
-from turtle import turtlesize
+# imports
+# from crypt import methods
 from unicodedata import category
+from unittest import result
 from warnings import catch_warnings
-from flask import Flask, render_template, request, redirect, session, flash, url_for
+from flask import Flask, jsonify, render_template, request, redirect, session, flash, url_for
 from PIL import Image
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
@@ -14,9 +12,10 @@ import urllib.request
 import uuid
 from datetime import date
 
-### app settings ###
+# app settings 
 
 app = Flask(__name__)
+
 app.secret_key = "jsiodjfiewnown7881U2HD912HND912"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///posts.sqlite3"
 
@@ -25,9 +24,9 @@ db = SQLAlchemy(app)
 
 
 
-### images setting ###
+# images setting - folder + allowed files 
 
-UPLOAD_FOLDER = "//Users/jiridofek/desktop/Coding project portfolio/lezeckybazar.cz/static/post_img"
+UPLOAD_FOLDER = "//Users/jiridofek/desktop/Coding project portfolio/lezeckybazar.cz/static/post_img/" 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024 
 
@@ -38,7 +37,7 @@ def allowed_file (filename):
 
 
 
-### database model ###
+# database model 
 
 class Posts(db.Model):
     _id = db.Column("id", db.Integer, primary_key = True)
@@ -81,7 +80,7 @@ class Posts(db.Model):
 
 
 
-
+# home page #
 
 
 @app.route("/", methods=["POST", "GET"])
@@ -91,91 +90,170 @@ def home():
     return render_template("home.html")
 
 
+# posts page #
 
 
-
-########################################################################################################################################################
-######## routes - 3 sports ##############
-########################################################################################################################################################
-
-
-@app.route("/lezeni/vse/<int:page_num>", methods=["POST", "GET"]) ### all categories ###
+@app.route("/lezeni/<int:page_num>", methods=["POST", "GET"])
 def all(page_num):
 
+    session.permanent = False
+
     location_filter = ""
+    category = ""
 
-    if "location_filter" in session:
 
-        location_filter = session["location_filter"]
-        location_tag = location_filter
-        posts = Posts.query.filter_by(sport = "1",location = location_filter).order_by(Posts._id.desc()).paginate(per_page=2, page=page_num, error_out=True )
+    # user already have some filter active
+
+    if "location_filter" in session or "category" in session:
+
+        # location and category filter active
+        if "location_filter" in session and "category" in session:
+
+            location_filter = session["location_filter"]
+            category = session["category"]
+            posts = Posts.query.filter(Posts.location.in_(location_filter), Posts.sport == "1",Posts.category.in_(category)).order_by(Posts._id.desc()).paginate(per_page=6, page=page_num, error_out=False )
+
+        else:
+            # only location filter is used
+            if "location_filter" in session:
+
+                location_filter = session["location_filter"]
+                posts = Posts.query.filter(Posts.location.in_(location_filter), Posts.sport == "1").order_by(Posts._id.desc()).paginate(per_page=6, page=page_num, error_out=False )
+
+            # only category filter used    
+            else:
+
+                category = session["category"]
+                posts = Posts.query.filter(Posts.sport == "1",Posts.category.in_(category)).order_by(Posts._id.desc()).paginate(per_page=6, page=page_num, error_out=False )
+
+
+
+    # user doesnt use any filter
 
     else:
 
-        posts = Posts.query.filter_by(sport = "1").order_by(Posts._id.desc()).paginate(per_page=2, page=page_num, error_out=True )
+        posts = Posts.query.filter_by(sport = "1").order_by(Posts._id.desc()).paginate(per_page=6, page=page_num, error_out=False )
   
         
     
   
-    
+    # user just clicked on filter button and we have to store them in sessions
 
     if request.method == "POST":
-
-        location_filter = request.form["location_filter"]
-
-
-        if location_filter != "all":
-
-            posts = Posts.query.filter_by(sport = "1", location = location_filter).order_by(Posts._id.desc()).paginate(per_page=2, page=page_num, error_out=True )
-            
-            session["location_filter"] = location_filter
-            
         
+        
+
+        location_filter = "all"
+
+
+        # request, which selects were selected
+        category = list(request.form.keys())
+        
+       
+        # we need to seperate cities filter and category filter 
+
+        cities = ["Brno", "Ostrava", "Praha", "Plzeň", "Olomouc", "Zlín", "Písek", "České Budějovice", "Ústí nad Labem", "Liberec", "Hradec Králové", "Písek", "Jihlava"]
+        location_filter = []
+        
+        for i in cities:
+
+
+            try:
+
+               category.remove(str(i))
+               location_filter.append(str(i))
+               
+
+
+            
+            except ValueError:
+
+               pass
+
+        
+       # something is selected, form is not empty 
+
+        if location_filter or category:
+
+            # selected location and category
+            if location_filter and category:
+
+                posts = Posts.query.filter(Posts.location.in_(location_filter), Posts.sport == "1",Posts.category.in_(category)).order_by(Posts._id.desc()).paginate(per_page=6, page=page_num, error_out=False )
+                
+                session["location_filter"] = location_filter
+                session["category"] = category
+            
+            else:
+                # selected location only
+                if location_filter:
+
+                    posts = Posts.query.filter(Posts.location.in_(location_filter), Posts.sport == "1").order_by(Posts._id.desc()).paginate(per_page=6, page=page_num, error_out=False )
+                
+                    session["location_filter"] = location_filter
+                    session.pop("category", None)
+                
+                # selected category only
+                else:
+                    
+                    posts = Posts.query.filter(Posts.sport == "1",Posts.category.in_(category)).order_by(Posts._id.desc()).paginate(per_page=6, page=page_num, error_out=False )
+                
+                    
+                    session["category"] = category
+                    session.pop("location_filter", None)
+                    
+                
+        # form was sent with no select (empty form)
+
         else:
-            posts = Posts.query.filter_by(sport = "1").order_by(Posts._id.desc()).paginate(per_page=2, page=page_num, error_out=True )
+
+            posts = Posts.query.filter_by(sport = "1").order_by(Posts._id.desc()).paginate(per_page=6, page=page_num, error_out=False )
             session.pop("location_filter", None)
+            session.pop("category", None)
+    
+        return redirect("/lezeni/1")
     
     
 
 
         
     
-    return render_template ("all_categories.html", posts = posts, location_tag = location_filter)
+    return render_template ("all_categories.html", posts = posts, location_tag = location_filter, category = category)
+
+    
+# single post view - user selected from list of post     
+
+@app.route("/inzerat/<int:_id>")
+def individual_post(_id):
+
+    post = Posts.query.get_or_404(_id)
+
+    return render_template("post.html", posts = post)
 
 
+# location filter delete 
 
-@app.route("/lezecky/<int:page_num>", methods=["POST", "GET"]) ### lezecky category ###
-def lezecky(page_num):
+@app.route("/vymazat-lokaci")
+def delete_location():
+    previous_page = request.referrer
+    session.pop("location_filter", None)
+    return redirect(previous_page)
 
-    posts = Posts.query.filter_by(category = "Lezecky").order_by(Posts._id.desc()).paginate(per_page=2, page=page_num, error_out=True )
-    location_tag = ""
+ # category filter delete    
 
-    if request.method == "POST":
-
-        location_filter = request.form["location_filter"]
-
-        if location_filter != "all":
-
-            posts = Posts.query.filter_by(category = "Lezecky", location = location_filter).order_by(Posts._id.desc()).paginate(per_page=2, page=page_num, error_out=True )
-            location_tag = location_filter
-
-    return render_template ("lezecky.html", posts = posts, location_tag = location_filter)
-
-
-
-
-
-
-
-
-
-
+@app.route("/vymazat-kategorii")
+def delete_category():
+    previous_page = request.referrer
+    session.pop("category", None)
+    return redirect(previous_page)
 
 
 ##################################
 ## adding new post - 3 variants ##
-####### + choose sport  ##########
+# only one is active #
 ##################################
+
+
+# user will choose sport, where post will be added
 
 @app.route("/pridat-inzerat", methods=["POST", "GET"]) ### choose sport, where you want to insert
 def choose_sport ():
@@ -183,7 +261,7 @@ def choose_sport ():
     return render_template("choose_sport.html")
 
 
-
+# add to drytool
 @app.route("/pridat-inzerat/drytool", methods=["POST", "GET"]) ### adding new post ###
 def add_post_ice ():
 
@@ -232,11 +310,13 @@ def add_post_ice ():
                 db.session.commit()
                 
 
-
+        
         
 
     return render_template("add_ice.html")
 
+
+# add to vhs
 @app.route("/pridat-inzerat/vhs", methods=["POST", "GET"]) ### adding new post in VHS ###
 def add_post_vhs ():
 
@@ -291,8 +371,7 @@ def add_post_vhs ():
     return render_template("add_vhs.html")
 
 
-
-
+# add to sport climbing - bouldering
 
 @app.route("/pridat-inzerat/lezeni", methods=["POST", "GET"]) ### adding new post ###
 def add_post_climbing ():
@@ -342,16 +421,45 @@ def add_post_climbing ():
                 
 
 
-        
+        return redirect(url_for(("all"), page_num = 1))
 
     return render_template("add_climbing.html")
 
 
+# webpage api in JSON - ready for use - all posts
+
+@app.route("/api")
+def api():
+
+    posts = Posts.query.all()
+    output = []
+
+    for post in posts:
+        currentpost = {}
+        currentpost ["post._id"] = post._id
+        currentpost ["post_name"] = post.post_name
+        currentpost ["date"] = post.date
+        currentpost ["sport"] = post.sport
+        currentpost ["category"] = post.category
+        currentpost ["description"] = post.description
+        currentpost ["price"] = post.price
+        currentpost ["person_name"] = post.person_name
+        currentpost ["location"] = post.location
+        currentpost ["contact"] = post.contact
+        
+
+        output.append(currentpost)
+
+    return jsonify(output)
+
+
+# user wants to delete post
 
 @app.route("/smazat-inzerat", methods=["POST", "GET"])
 def smazat():
 
     posts = ""
+    progress = "50"
 
     if request.method == "POST":
 
@@ -363,17 +471,23 @@ def smazat():
             contact = request.form["contact"]
             password = request.form["password"]
             posts = Posts.query.filter_by(contact = contact, password = password).order_by(Posts._id.desc()).all()
+
+            if posts:
+                progress = "100"
+
+            else:
+                flash("Nebyl nalezen žádný inzerát. Možná si zadal špatný kontakt, heslo, nebo nemáš aktivní žádné inzeráty.")
         
         else: ### deleting post and image from folder ###
             id = request.form["_id"]
             post = Posts.query.filter_by(_id = id).first()
             post_img = post.image
-            os.remove("//Users/jiridofek/desktop/Coding project portfolio/lezeckybazar.cz/static/post_img/" + post_img)
+            os.remove(UPLOAD_FOLDER + post_img)
             Posts.query.filter_by(_id = id).delete()
             db.session.commit()
             flash("Inzerat byl uspesne smazan.")
             
-            print(id)
+            
 
         
 
@@ -381,13 +495,13 @@ def smazat():
 
 
 
-    return render_template("delete_post.html", posts = posts)
+    return render_template("delete_post.html", posts = posts, progress = progress)
 
 
 
 
 
-
+# running the app
 
 if __name__ == "__main__":
     db.create_all()

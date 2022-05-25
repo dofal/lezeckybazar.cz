@@ -136,3 +136,53 @@ h5{
     background-color: blanchedalmond; 
     margin-right: 100px;
 }
+
+#category-alert {
+    background-color: #315C7C;
+    border-radius: 10px;
+    padding: 6px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+#posts_list {
+
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    margin-bottom: 3vh;
+    padding: 10px;
+    min-height: 200px;
+   
+
+}
+
+#description {
+
+    color: rgb(36, 34, 34);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* number of lines to show */
+            line-clamp: 4; 
+    -webkit-box-orient: vertical;
+
+}
+
+#price {
+
+    font-size: 25px;
+    color: #315C7C;
+}
+
+#price-list {
+
+    font-size: 21px;
+    color: #315C7C;
+}
+
+#pages {
+
+    color: #315C7C;
+    font-size: 18px;
+    text-decoration: none;
+    
+}
