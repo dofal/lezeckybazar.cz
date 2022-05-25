@@ -4,8 +4,8 @@ Hello there! Welcome in my repository.This is my fully working prototype of onli
 I created also page for public API, which can be used for example to create mobile APP. 
 I was looking for a new project and i found out, there is no insert web app for climbing in Czech republic, so i decided to create it. 
 
-Users are able to insert their climbing equipment(including photos) and delete them (after selling) - USER WANTS TO SELL
-Users are able to view and filter offers of users, who wants to sell. You can filter by near city and category. Multiple combinations possible - USER WANTS TO BUY
+<p>Users are able to insert their climbing equipment(including photos) and delete them (after selling) - USER WANTS TO SELL </p>
+<p>Users are able to view and filter offers of users, who wants to sell. You can filter by near city and category. Multiple combinations possible - USER WANTS TO BUY </p>
 
 Used technologies: Python, Flask, SqlAlchemy, SQLite, HTML, CSS
 
