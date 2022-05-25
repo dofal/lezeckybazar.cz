@@ -7,7 +7,7 @@ I was looking for a new project and i found out, there is no insert web app for 
 Users are able to insert their climbing equipment(including photos) and delete them (after selling) - USER WANTS TO SELL
 Users are able to view and filter offers of users, who wants to sell. You can filter by near city and category. Multiple combinations possible - USER WANTS TO BUY
 
-Used technologies: Python, Flask, SqlAlchemy, SQLite
+Used technologies: Python, Flask, SqlAlchemy, SQLite, HTML, CSS
 
 
 Requirements to run project:
