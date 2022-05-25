@@ -4,7 +4,7 @@ from unicodedata import category
 from unittest import result
 from warnings import catch_warnings
 from flask import Flask, jsonify, render_template, request, redirect, session, flash, url_for
-from PIL import Image
+
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 import os
